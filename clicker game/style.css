@@ -1,0 +1,467 @@
+:root {
+    color-scheme: light;
+    --ink: #482c38;
+    --muted-ink: #866b70;
+    --cherry: #dc4962;
+    --deep-cherry: #ad2e4c;
+    --blush: #f5cbd0;
+    --gold: #f2c65b;
+    --paper: #fff5e8;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--paper);
+    background-image: radial-gradient(#e8d8c6 0.8px, transparent 0.8px);
+    background-size: 22px 22px;
+    color: var(--ink);
+    font-family: "Trebuchet MS", sans-serif;
+}
+
+button {
+    font: inherit;
+}
+
+.game-shell {
+    display: flex;
+    width: min(100% - 32px, 580px);
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 34px 0 24px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.game-heading {
+    margin-bottom: 18px;
+}
+
+.eyebrow {
+    margin: 0 0 10px;
+    color: #a05b63;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.game-heading h1 {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 50px;
+    font-weight: normal;
+}
+
+.intro {
+    margin: 10px 0 0;
+    color: var(--muted-ink);
+    font-size: 17px;
+}
+
+.game {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heart-counter {
+    display: flex;
+    min-height: 36px;
+    align-items: center;
+    gap: 9px;
+    color: #684452;
+    font-size: 18px;
+}
+
+.counter-heart {
+    color: var(--cherry);
+    font-size: 25px;
+}
+
+.heart-counter strong {
+    color: var(--deep-cherry);
+    font-size: 23px;
+}
+
+.heart-stage {
+    position: relative;
+    display: grid;
+    width: 230px;
+    height: 220px;
+    margin: 6px 0 2px;
+    place-items: center;
+}
+
+.heart-button {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 190px;
+    height: 190px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    place-items: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.heart-button::before {
+    position: absolute;
+    inset: 18px;
+    border: 1px dashed #e4a3a4;
+    border-radius: 50%;
+    content: "";
+    transition: transform 180ms ease;
+}
+
+.heart-mark {
+    display: block;
+    color: var(--cherry);
+    filter: drop-shadow(0 8px 0 var(--deep-cherry));
+    font-size: 142px;
+    line-height: 1;
+    transition: transform 180ms ease, color 180ms ease;
+}
+
+.heart-button:hover .heart-mark {
+    color: #ed5b70;
+    transform: scale(1.06);
+}
+
+.heart-button:hover::before {
+    transform: scale(1.08);
+}
+
+.heart-button:focus-visible,
+.again-button:focus-visible {
+    border-radius: 50%;
+    outline: 3px solid #6b8f71;
+    outline-offset: 5px;
+}
+
+.heart-button:disabled {
+    cursor: default;
+}
+
+.heart-pop .heart-mark {
+    animation: heart-pop 380ms ease-out;
+}
+
+.heart-rain {
+    position: fixed;
+    z-index: 6;
+    overflow: hidden;
+    pointer-events: none;
+    inset: 0;
+}
+
+.floating-heart {
+    position: absolute;
+    color: #d62839;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: float-heart 1.7s cubic-bezier(0.2, 0.7, 0.25, 1) both;
+}
+
+.love-message {
+    min-height: 74px;
+    margin-top: 0;
+}
+
+.message-language {
+    margin: 0 0 5px;
+    color: #a05b63;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.message-phrase {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 25px;
+}
+
+.message-pop {
+    animation: message-pop 280ms ease-out;
+}
+
+.progress-track {
+    overflow: hidden;
+    width: min(100%, 300px);
+    height: 9px;
+    margin-top: 12px;
+    border-radius: 9px;
+    background: #ead6c9;
+}
+
+.progress-fill {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #e77c75, #cf3f5b);
+    transition: width 240ms ease-out;
+}
+
+footer {
+    margin-top: 26px;
+    color: #987982;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.finish-overlay {
+    position: fixed;
+    z-index: 5;
+    display: grid;
+    padding: 22px;
+    place-items: center;
+    background: rgba(72, 44, 56, 0.72);
+    inset: 0;
+}
+
+.finish-overlay[hidden] {
+    display: none;
+}
+
+.finish-card {
+    width: min(100%, 460px);
+    padding: 34px 24px 30px;
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    background: var(--paper);
+    box-shadow: 0 22px 60px rgba(50, 25, 36, 0.3);
+    text-align: center;
+    animation: finish-in 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.finish-heart {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--cherry);
+    filter: drop-shadow(0 4px 0 var(--deep-cherry));
+    font-size: 62px;
+    line-height: 1.1;
+}
+
+.finish-card h2 {
+    margin: 8px 0 12px;
+    color: var(--deep-cherry);
+    font-family: Georgia, serif;
+    font-size: 36px;
+    font-weight: normal;
+}
+
+.finish-copy {
+    margin: 0 0 22px;
+    color: var(--muted-ink);
+    font-size: 17px;
+}
+
+.again-button {
+    padding: 12px 22px;
+    border: 0;
+    border-radius: 5px;
+    background: #557c64;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.again-button:hover {
+    background: #42664f;
+}
+
+@keyframes heart-pop {
+    0%, 100% { transform: scale(1); }
+    38% { transform: scale(1.18); }
+    68% { transform: scale(0.96); }
+}
+
+@keyframes float-heart {
+    0% {
+        opacity: 0;
+        transform: translate3d(-50%, 0, 0) scale(0.18) rotate(-14deg);
+    }
+    22% {
+        opacity: 0.95;
+        transform: translate3d(-50%, -12px, 0) scale(1.08) rotate(5deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(calc(-50% + var(--drift)), var(--float-y), 0) scale(1.2) rotate(var(--spin));
+    }
+}
+
+@keyframes message-pop {
+    from {
+        opacity: 0.3;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes finish-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+    .game-shell {
+        padding-top: 26px;
+    }
+
+    .game-heading h1 {
+        font-size: 42px;
+    }
+
+    .heart-stage {
+        height: 200px;
+    }
+
+    .heart-button {
+        width: 176px;
+        height: 176px;
+    }
+
+    .heart-mark {
+        font-size: 128px;
+    }
+
+    .finish-card h2 {
+        font-size: 31px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}body {
+    text-align: center;
+    font-family: Arial;
+    background-color: #87ceeb;
+}
+
+button {
+    font-size: 30px;
+    padding: 20px 40px;
+}
+
+.coin-icon {
+    display: inline-grid;
+    width: 1.1em;
+    height: 1.1em;
+    margin-right: 0.25em;
+    place-items: center;
+    border: 2px solid #a96e00;
+    border-radius: 50%;
+    background-color: #f5c542;
+    box-shadow: inset 0 0 0 2px #ffe78a;
+    color: #805300;
+    font-size: 0.9em;
+    font-weight: bold;
+    line-height: 1;
+    vertical-align: -0.12em;
+}
+
+.coin-icon::before {
+    content: "$";
+}
+
+.victory-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: grid;
+    padding: 24px;
+    place-items: center;
+    background: rgba(15, 54, 72, 0.76);
+}
+
+.victory-overlay[hidden] {
+    display: none;
+}
+
+.victory-panel {
+    width: min(100%, 440px);
+    padding: 32px 24px;
+    border: 4px solid #f5c542;
+    border-radius: 8px;
+    background: #fffaf0;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+    color: #17324d;
+    animation: victory-pop 350ms ease-out both;
+}
+
+.victory-coin {
+    width: 44px;
+    height: 44px;
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+.victory-panel h2 {
+    margin: 0 0 12px;
+    font-size: 44px;
+}
+
+.victory-panel p {
+    margin: 0 0 24px;
+    font-size: 20px;
+}
+
+.victory-panel button {
+    border: 0;
+    border-radius: 6px;
+    background: #1b805e;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 12px 24px;
+}
+
+.victory-panel button:hover {
+    background: #146748;
+}
+
+@keyframes victory-pop {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .victory-panel {
+        animation: none;
+    }
+}

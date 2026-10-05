@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szívkattintó</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="game-shell">
+        <header class="game-heading">
+            <p class="eyebrow">EGY KIS SZERELMES ÜZENET</p>
+            <h1>Kattints, ha szeretsz engem</h1>
+            <p class="intro">Tíz szív, tíz nyelven.</p>
+        </header>
+
+        <section class="game" aria-label="Szívecskegyűjtő játék">
+            <div class="heart-counter" aria-live="polite">
+                <span class="counter-heart" aria-hidden="true">&#9829;</span>
+                <span><strong id="heartCount">0</strong> szív</span>
+            </div>
+
+            <div class="heart-stage" id="heartStage">
+                <button class="heart-button" id="heartButton" type="button" aria-label="Adj egy szívet">
+                    <span class="heart-mark" aria-hidden="true">&#9829;</span>
+                </button>
+            </div>
+
+            <div class="love-message" id="loveMessage" aria-live="polite" aria-atomic="true">
+                <p class="message-language" id="messageLanguage">Kezdhetjük?</p>
+                <p class="message-phrase" id="messagePhrase">Kattints a szívre, hogy elküldd az első üzenetet.</p>
+            </div>
+
+            <div class="progress-track" id="progressTrack" role="progressbar" aria-label="Összegyűjtött szívek" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
+                <span class="progress-fill" id="progressFill"></span>
+            </div>
+        </section>
+
+        <footer>Teljes szívemből, neked.</footer>
+    </main>
+
+    <div class="heart-rain" id="heartRain" aria-hidden="true"></div>
+
+    <div class="finish-overlay" id="finishOverlay" hidden>
+        <section class="finish-card" role="dialog" aria-modal="true" aria-labelledby="finishTitle">
+            <span class="finish-heart" aria-hidden="true">&#9829;</span>
+            <p class="eyebrow">TÍZ SZÍV, EGY NAGY VALLOMÁS</p>
+            <h2 id="finishTitle">Szeretlek Lizikem</h2>
+            <p class="finish-copy">Minden szívet neked küldtem.</p>
+            <button class="again-button" id="againButton" type="button">Játssz újra</button>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
